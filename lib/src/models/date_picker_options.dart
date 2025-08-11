@@ -6,6 +6,8 @@ class DatePickerOptions {
     this.diameterRatio = 3,
     this.perspective = 0.01,
     this.isLoop,
+    this.background,
+    @Deprecated('Use background instead')
     this.backgroundColor = Colors.white,
   });
 
@@ -22,5 +24,9 @@ class DatePickerOptions {
   final bool? isLoop;
 
   /// The color to paint behind the date picker
+  @Deprecated('Use background instead')
   final Color backgroundColor;
+
+  /// The background decoration of the date picker
+  final Decoration background;
 }
