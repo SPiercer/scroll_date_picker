@@ -177,8 +177,8 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
           _initMonths();
           _initDays();
           if (isYearScrollable) {
-            //_monthController.jumpToItem(selectedMonthIndex);
-            //_dayController.jumpToItem(selectedDayIndex);
+            _monthController.jumpToItem(selectedMonthIndex);
+            _dayController.jumpToItem(selectedDayIndex);
           }
           isYearScrollable = true;
         });
@@ -195,7 +195,7 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
         _onDateTimeChanged();
         _initDays();
         if (isMonthScrollable) {
-          //_dayController.jumpToItem(selectedDayIndex);
+          _dayController.jumpToItem(selectedDayIndex);
         }
         isMonthScrollable = true;
       },
@@ -309,19 +309,10 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        NotificationListener<ScrollNotification>(
-          onNotification: (notification) {
-            if (notification is ScrollEndNotification) {
-              debugPrint("ScrollEndNotification");
-              setState(() {});
-            }
-            return false;
-          },
-          child: Row(
-            mainAxisAlignment: widget.scrollViewOptions.mainAxisAlignment,
-            crossAxisAlignment: widget.scrollViewOptions.crossAxisAlignment,
-            children: _getScrollDatePicker(),
-          ),
+        Row(
+          mainAxisAlignment: widget.scrollViewOptions.mainAxisAlignment,
+          crossAxisAlignment: widget.scrollViewOptions.crossAxisAlignment,
+          children: _getScrollDatePicker(),
         ),
         // Date Picker Indicator
         IgnorePointer(
@@ -330,16 +321,17 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
             children: [
               Expanded(
                 child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        widget.options.backgroundColor,
-                        widget.options.backgroundColor.withOpacity(0.7),
-                      ],
-                    ),
-                  ),
+                  decoration: widget.options.background ??
+                      BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            widget.options.backgroundColor,
+                            widget.options.backgroundColor.withOpacity(0.7),
+                          ],
+                        ),
+                      ),
                 ),
               ),
               widget.indicator ??
@@ -352,16 +344,17 @@ class _ScrollDatePickerState extends State<ScrollDatePicker> {
                   ),
               Expanded(
                 child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        widget.options.backgroundColor.withOpacity(0.7),
-                        widget.options.backgroundColor,
-                      ],
-                    ),
-                  ),
+                  decoration: widget.options.background ??
+                      BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            widget.options.backgroundColor.withOpacity(0.7),
+                            widget.options.backgroundColor,
+                          ],
+                        ),
+                      ),
                 ),
               ),
             ],
