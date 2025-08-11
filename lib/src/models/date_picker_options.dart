@@ -28,5 +28,5 @@ class DatePickerOptions {
   final Color backgroundColor;
 
   /// The background decoration of the date picker
-  final Decoration background;
+  final Decoration? background;
 }
